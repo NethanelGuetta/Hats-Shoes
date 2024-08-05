@@ -39,6 +39,8 @@ namespace Hats_Shoes.DAL
 
         public DbSet<Hat> Hats { get; set; }
         public DbSet<Shoe> Shoes { get; set; }
- 
-    }
+		public DbSet<Cart> Carts { get; set; }
+
+
+	}
 }
