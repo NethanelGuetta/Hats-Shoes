@@ -8,6 +8,7 @@ namespace Hats_Shoes.DAL
 {
     public class DataLayer : DbContext
     {
+        // change
         public DataLayer(string connectionString) : base(GetOptions(connectionString))
         {
             Database.EnsureCreated();
