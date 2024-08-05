@@ -15,5 +15,16 @@ namespace Hats_Shoes.Models
 
         [Display(Name = "brand")]
         public string Brand { get; set; }
+
+        [Display (Name = "image")]
+        public string Image { get; set; }
+
+        public Shoe (int size, string color, string brand, string image)
+        {
+            Size = size;
+            Color = color;
+            Brand = brand;
+            Image = image;
+        }
     }
 }
