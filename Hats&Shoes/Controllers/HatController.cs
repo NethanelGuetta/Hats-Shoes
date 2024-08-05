@@ -18,10 +18,10 @@ namespace Hats_Shoes.Controllers
             Data.Get.SaveChanges();
             var hats = Data.Get.Hats.ToList();
             TempData["ErrorMessage"] = "נמחק בהצלחה";
-            return View("Index");
-        }
+			return RedirectToAction(nameof(Index));
+		}
 
-        public IActionResult Edit(int id)
+		public IActionResult Edit(int id)
         {
             var hat = Data.Get.Hats.FirstOrDefault(h => h.Id == id);
            
@@ -38,9 +38,24 @@ namespace Hats_Shoes.Controllers
             hat.Size = hat2.Size;
             hat.Image = hat2.Image;
             Data.Get.SaveChanges();
-            return RedirectToAction(nameof(Index));
-        }
-       
+			TempData["ErrorMessage"] = "עודכן בהצלחה";
 
-    }
+			return RedirectToAction(nameof(Index));
+        }
+
+		public IActionResult Create()
+		{
+			return View();
+		}
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public IActionResult Create( Hat hat)
+		{
+            Data.Get.Hats.Add(hat);
+            Data.Get.SaveChanges();
+			TempData["ErrorMessage"] = "נוצר בהצלחה";
+
+			return RedirectToAction(nameof(Index));
+		}
+	}
 }
