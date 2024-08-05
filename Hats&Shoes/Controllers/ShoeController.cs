@@ -21,5 +21,18 @@ namespace Hats_Shoes.Controllers
             var Shoes = Data.Get.Shoes.ToList();
             return View(Shoes);
         }
+
+        public IActionResult Delete(int? id)
+        { 
+            if (id == null) return RedirectToAction("Index");
+            Shoe? shoeToDelete = Data.Get.Shoes.FirstOrDefault(x => x.Id == id);
+            if (shoeToDelete == null) return RedirectToAction("Index");
+
+            Data.Get.Remove(shoeToDelete);
+            Data.Get.SaveChanges();
+
+            return RedirectToAction("Index");
+           
+        }
     }
 }
