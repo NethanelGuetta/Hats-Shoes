@@ -23,6 +23,19 @@ namespace Hats_Shoes.Controllers
             return View(Shoes);
         }
 
+        public IActionResult Create()
+        {
+            return View(new Shoe());
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public IActionResult Create(Shoe shoe)
+        {
+
+            Data.Get.Shoes.Add(shoe);
+            Data.Get.SaveChanges();
+            return RedirectToAction("Index");
+        }
         public IActionResult Delete(int? id)
         { 
             if (id == null) return RedirectToAction("Index");
