@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Hats_Shoes.DAL;
 using Hats_Shoes.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 
 
@@ -33,6 +34,28 @@ namespace Hats_Shoes.Controllers
 
             return RedirectToAction("Index");
            
+        }
+        public IActionResult Edit()
+        { return View(); }
+
+
+        [HttpPost]
+        public IActionResult Edit(Shoe shoe)
+        {
+            if (shoe.Id == null) return RedirectToAction("Index");
+
+            Shoe? shoeToUpdate = Data.Get.Shoes.FirstOrDefault(x => x.Id == shoe.Id);
+            if (shoeToUpdate == null) return RedirectToAction("Index");
+
+            shoeToUpdate.Size = shoe.Size;
+            shoeToUpdate.Color = shoe.Color;
+            shoeToUpdate.Brand = shoe.Brand;        
+            shoeToUpdate.Image = shoe.Image;
+
+            Data.Get.Shoes.Update(shoeToUpdate);
+            Data.Get.SaveChanges();
+           
+            return RedirectToAction("Index");
         }
     }
 }
