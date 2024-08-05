@@ -25,6 +25,6 @@ namespace Hats_Shoes.Models
             Brand = brand;
             Image = image;
         }
-
-    }
+		public Hat() { }
+	}
 }

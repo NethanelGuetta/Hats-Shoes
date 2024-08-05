@@ -18,14 +18,27 @@ namespace Hats_Shoes.Controllers
             Data.Get.SaveChanges();
             var hats = Data.Get.Hats.ToList();
             TempData["ErrorMessage"] = "נמחק בהצלחה";
-            return View("Index",hats);
+            return View("Index");
         }
 
         public IActionResult Edit(int id)
         {
             var hat = Data.Get.Hats.FirstOrDefault(h => h.Id == id);
-            
+           
             return View(hat);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(Hat hat2)
+        {
+            var hat = Data.Get.Hats.FirstOrDefault(h => h.Id ==hat2.Id);
+            hat.Brand = hat2.Brand;
+            hat.Color = hat2.Color;
+            hat.Size = hat2.Size;
+            hat.Image = hat2.Image;
+            Data.Get.SaveChanges();
+            return RedirectToAction(nameof(Index));
         }
        
 
