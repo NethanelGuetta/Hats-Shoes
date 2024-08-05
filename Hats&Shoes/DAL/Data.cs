@@ -2,7 +2,7 @@
 {
     public class Data
     {
-        private readonly string connectionString = "server=LAPTOP-9ENQOSOT\\SA;initial catalog=Brand_store;user id=SA;password=1234;TrustServerCertificate=Yes";
+        private readonly string connectionString = "server=LAPTOP-FGRUOMCA\\SA;initial catalog=Brand_store;user id=SA;password=1234;TrustServerCertificate=Yes";
 
         private static Data _data;
         private DataLayer DataLayer;
