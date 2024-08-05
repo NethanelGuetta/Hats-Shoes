@@ -1,4 +1,5 @@
 ﻿using Hats_Shoes.DAL;
+using Hats_Shoes.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hats_Shoes.Controllers
@@ -10,8 +11,23 @@ namespace Hats_Shoes.Controllers
             var hats = Data.Get.Hats.ToList();
             return View(hats);
         }
+        public IActionResult Delete(int id)
+        {
+            var hat = Data.Get.Hats.FirstOrDefault(h => h.Id == id);
+            Data.Get.Hats.Remove(hat);
+            Data.Get.SaveChanges();
+            var hats = Data.Get.Hats.ToList();
+            TempData["ErrorMessage"] = "נמחק בהצלחה";
+            return View("Index",hats);
+        }
 
-
+        public IActionResult Edit(int id)
+        {
+            var hat = Data.Get.Hats.FirstOrDefault(h => h.Id == id);
+            
+            return View(hat);
+        }
+       
 
     }
 }
